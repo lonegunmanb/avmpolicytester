@@ -1,0 +1,38 @@
+name: Test
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version-file: go.mod
+
+    - name: Install conftest
+      run: CGO_ENABLED=0 go install github.com/open-policy-agent/conftest@latest
+
+    - name: Clone OPA policy sample
+      run: |
+        mkdir /sample
+        cd /sample
+        git clone https://github.com/lonegunmanb2/opa_policy_sample.git
+
+    - name: Run tests
+      run: |
+        export POLICY_DIR="/sample/opa_policy_sample/policy-as-code/OPA/policy"
+        export UTILS_REGO="/sample/opa_policy_sample/policy-as-code/OPA/policy/common.utils.rego"
+        go test github.com/lonegunmanb/avmpolicytester/...
