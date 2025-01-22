@@ -17,6 +17,14 @@ var skippedRegoKeyWords = []string{
 	"test",
 	"utils",
 }
+var planFields = []string{
+	"resource_changes",
+	"configuration",
+	"terraform_version",
+	"planned_values",
+	"output_changes",
+	"format_version",
+}
 
 func TestPolicy(t *testing.T) {
 	rootDir := os.Getenv("POLICY_DIR")
@@ -107,12 +115,14 @@ func readCases(t *testing.T, valid bool, mockMap map[string]any, filePath string
 	if ok {
 		m, ok := field.(map[string]any)
 		require.True(t, ok, "fieldKey field in mock of %s is not a map", fieldKey, filePath)
-		if containsKey(m, "resource_changes") || containsKey(m, "configuration") {
-			result["default"] = field
-		} else {
-			result = m
+
+		for _, pf := range planFields {
+			if containsKey(m, pf) {
+				result["default"] = field
+				return result
+			}
 		}
-		return result
+		return m
 	}
 	for name, value := range mockMap {
 		if !strings.Contains(name, "valid") {
