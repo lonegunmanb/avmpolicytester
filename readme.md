@@ -9,17 +9,17 @@ The test helper assumes the following structure for Rego policy files and their 
 Each `.rego` file should have a corresponding `.mock.json` file that contains the mock data for testing.
 
 ```text
-└── test
-├── policy1
-│   ├── policy1.mock.json
-│   ├── policy1.rego
-│   ├── policy2.mock.json
-│   └── policy2.rego
-└── policy2
-    ├── policy1.mock.json
-    ├── policy1.rego
-    ├── policy2.mock.json
-    └── policy2.rego
+└── policy
+    ├── policy1
+    │   ├── policy1.mock.json
+    │   ├── policy1.rego
+    │   ├── policy2.mock.json
+    │   └── policy2.rego
+    └── policy2
+        ├── policy1.mock.json
+        ├── policy1.rego
+        ├── policy2.mock.json
+        └── policy2.rego
 
 ```
 
