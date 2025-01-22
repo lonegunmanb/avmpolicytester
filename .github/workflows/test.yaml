@@ -27,12 +27,12 @@ jobs:
 
     - name: Clone OPA policy sample
       run: |
-        mkdir /sample
-        cd /sample
+        mkdir /tmp/sample
+        cd /tmp/sample
         git clone https://github.com/lonegunmanb2/opa_policy_sample.git
 
     - name: Run tests
       run: |
-        export POLICY_DIR="/sample/opa_policy_sample/policy-as-code/OPA/policy"
-        export UTILS_REGO="/sample/opa_policy_sample/policy-as-code/OPA/policy/common.utils.rego"
+        export POLICY_DIR="/tmp/sample/opa_policy_sample/policy-as-code/OPA/policy"
+        export UTILS_REGO="/tmp/sample/opa_policy_sample/policy-as-code/OPA/policy/common.utils.rego"
         go test github.com/lonegunmanb/avmpolicytester/...
