@@ -143,8 +143,6 @@ func testCase(t *testing.T, caseName string, payload any, policyFiles []string) 
 		cmdArgs = append(cmdArgs, "-p", policyFile)
 	}
 	cmdArgs = append(cmdArgs, tmpRegoFile.Name())
-	join := strings.Join(cmdArgs, " ")
-	println(join)
 	cmd := exec.Command("conftest", cmdArgs...)
 	return cmd.Run() == nil, nil
 }
