@@ -125,9 +125,6 @@ func readCases(t *testing.T, valid bool, mockMap map[string]any, filePath string
 		return m
 	}
 	for name, value := range mockMap {
-		if !strings.Contains(name, "valid") {
-			continue
-		}
 		if (strings.HasPrefix(name, fieldKey)) || (valid && !strings.HasPrefix(name, "invalid")) {
 			result[name] = value
 		}
