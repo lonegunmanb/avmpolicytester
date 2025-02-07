@@ -23,7 +23,7 @@ jobs:
         go-version-file: go.mod
 
     - name: Install conftest
-      run: CGO_ENABLED=0 go install github.com/open-policy-agent/conftest@latest
+      run: CGO_ENABLED=0 go install github.com/open-policy-agent/conftest@0c742d1fe6de625ef949601c8e6da264ea242936
 
     - name: Clone OPA policy sample
       run: |
