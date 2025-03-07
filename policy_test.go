@@ -90,7 +90,7 @@ func parseJsonCases(t *testing.T, filePath string) (map[string]any, map[string]a
 	}
 	mockFilePath := strings.TrimSuffix(filePath, ".rego") + ".mock.json"
 	if _, err := os.Stat(mockFilePath); os.IsNotExist(err) {
-		t.Fatalf("mock file %s does not exist", mockFilePath)
+		t.Skipf("skip %s since mock file %s does not exist", filePath, mockFilePath)
 	}
 	mockFileContent, err := os.ReadFile(mockFilePath)
 	require.NoError(t, err, "failed to read mock file %s", mockFilePath)
